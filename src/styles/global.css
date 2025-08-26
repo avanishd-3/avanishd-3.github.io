@@ -7,17 +7,17 @@
 html[data-theme="light"] {
   --background: #fdfdfd;
   --foreground: #282728;
-  --accent: #006cac;
+  --accent: #103f1aeb;
   --muted: #e6e6e6;
-  --border: #ece9e9;
+  --border: #d7d2d2;
 }
 
 html[data-theme="dark"] {
   --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60;
-  --border: #ab4b08;
+  --foreground: #f2f2f5;   
+  --accent: #2d843ecb;     
+  --muted: #435374;     
+  --border: #b7b9bd; 
 }
 
 @theme inline {
