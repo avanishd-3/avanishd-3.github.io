@@ -315,17 +315,6 @@ docker build -t astropaper .
 docker run -p 4321:80 astropaper
 ```
 
-## Google Site Verification (optional)
-
-You can easily add your [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) in AstroPaper using an environment variable. This step is optional. If you don't add the following environment variable, the google-site-verification tag won't appear in the HTML `<head>` section.
-
-```bash
-# in your environment variable file (.env)
-PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-site-verification-value
-```
-
-> See [this discussion](https://github.com/satnaing/astro-paper/discussions/334#discussioncomment-10139247) for adding AstroPaper to the Google Search Console.
-
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
