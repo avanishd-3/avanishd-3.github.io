@@ -1,7 +1,6 @@
 ---
 author: Avanish Davuluri
 pubDatetime: 2025-08-26T19:26:03.059Z
-modDatetime: 2025-08-26T19:26:03.059Z
 title: Hello, world
 slug: hello-world
 featured: true
