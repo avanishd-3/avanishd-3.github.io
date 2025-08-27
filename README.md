@@ -39,6 +39,8 @@ All blog posts are stored in `src/data/blog` directory.
 
 ## 📖 Documentation
 
+Using Astro Paper v5.5.0
+
 ### Adding Posts
 
 To write a new blog post, create a markdown file inside the `src/data/blog/` directory. You can organize blog posts into subdirectories, making it easier to manage content.
