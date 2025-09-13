@@ -137,6 +137,19 @@ const structuredData = {
   </body>
 </html>
 
+<script>
+  // CTRL+K or CMD+K to go to search page
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      const searchPage = "/search";
+      if (window.location.pathname !== searchPage) {
+        window.location.href = searchPage;
+      }
+    }
+  });
+</script>
+
 <style>
   html,
   body {
