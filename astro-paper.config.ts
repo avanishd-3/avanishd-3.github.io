@@ -23,8 +23,7 @@ export default defineAstroPaperConfig({
     showArchives: true,
     showBackButton: true, // show back button in post detail
     editPost: {
-      enabled: true,
-      url: "https://github.com/avanishd-3/avanishd-3.github.io/edit/main/",
+      enabled: false,
     },
     search: "pagefind",
   },

@@ -19,6 +19,8 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName.js";
 import config from "./astro-paper.config";
 
+import { remarkReadingTime } from "./src/remark/remark-reading-time.mjs";
+
 export default defineConfig({
   site: config.site.url,
   integrations: [
@@ -39,6 +41,7 @@ export default defineConfig({
     processor: unified({
       remarkPlugins: [
         remarkToc,
+        remarkReadingTime,
         [remarkCollapse, { test: "Table of contents" }],
       ],
       rehypePlugins: [rehypeCallouts],

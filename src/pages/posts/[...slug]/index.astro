@@ -73,7 +73,7 @@ const {
   hideEditPost,
 } = post.data;
 
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
 
 let ogImageUrl: string | undefined;
 
@@ -126,12 +126,13 @@ const ogImage = ogImageUrl
         aria-hidden="true"
         class:list={[
           "text-muted-foreground max-sm:hidden",
-          { hidden: !config.features.editPost?.enabled || hideEditPost },
         ]}
       >
         |
       </span>
-      <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+
+      <!-- Nice and minimal -->
+      <span class="text-muted-foreground max-sm:hidden">{remarkPluginFrontmatter.minutesRead}</span>
     </div>
 
     <article

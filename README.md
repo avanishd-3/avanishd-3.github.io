@@ -40,6 +40,7 @@ _Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver**
 │   │   └── posts/
 │   │       └── some-blog-posts.md
 │   ├── i18n/
+│   ├── remark/
 │   ├── layouts/
 │   ├── pages/
 │   ├── scripts/
