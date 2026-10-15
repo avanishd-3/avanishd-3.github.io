@@ -2,50 +2,103 @@
 
 Personal website.
 
-## 🚀 Project Structure
+## Features
 
+- [x] type-safe markdown
+- [x] super fast performance
+- [x] accessible (Keyboard/VoiceOver)
+- [x] responsive (mobile ~ desktops)
+- [x] SEO-friendly
+- [x] light & dark mode
+- [x] static search ([Pagefind](https://pagefind.app/))
+- [x] draft posts & pagination
+- [x] sitemap & rss feed
+- [x] MDX support
+- [x] collapsible table of contents
+- [x] followed best practices
+- [x] highly customizable
+- [x] dynamic OG image generation for blog posts
+- [x] i18n ready
+
+_Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver** on Mac and **TalkBack** on Android. I couldn't test all other screen-readers out there. However, accessibility enhancements in AstroPaper should be working fine on others as well._
+
+## Project Structure
 ```bash
 /
 ├── public/
-│   ├── assets/
-|   ├── pagefind/ # auto-generated when build
-│   └── favicon.svg
-│   └── astropaper-og.jpg
-│   └── favicon.svg
-│   └── toggle-theme.js
+│   ├── pagefind/          # auto-generated on build
+│   ├── favicon.svg
+│   └── default-og.jpg
 ├── src/
 │   ├── assets/
-│   │   └── icons/
+│   │   ├── icons/
 │   │   └── images/
 │   ├── components/
-│   ├── data/
-│   │   └── blog/
+│   ├── content/
+│   │   ├── pages/
+│   │   │   └── about.md
+│   │   └── posts/
 │   │       └── some-blog-posts.md
+│   ├── i18n/
 │   ├── layouts/
-│   └── pages/
-│   └── styles/
-│   └── utils/
-│   └── config.ts
-│   └── constants.ts
+│   ├── pages/
+│   ├── scripts/
+│   ├── styles/
+│   ├── types/
+│   ├── utils/
+│   ├── config.ts
 │   └── content.config.ts
+├── astro-paper.config.ts
 └── astro.config.ts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+All blog posts are stored in the `src/content/posts/` directory. You can organise posts into subdirectories — the subdirectory name becomes part of the post URL.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 💻 Tech Stack
 
-All blog posts are stored in `src/data/blog` directory.
+**Main Framework** - [Astro](https://astro.build/)  
+**Type Checking** - [TypeScript](https://www.typescriptlang.org/)  
+**Styling** - [TailwindCSS](https://tailwindcss.com/)   
+**Static Search** - [Pagefind](https://pagefind.app/)  
+**Icons** - [Tablers](https://tabler-icons.io/)  
+**Code Formatting** - [Prettier](https://prettier.io/)  
+**Linting** - [ESLint](https://eslint.org)  
+**Dynamic OG images** - [Satori](https://github.com/vercel/satori) + [Sharp](https://sharp.pixelplumbing.com/) + [Astro Fonts](https://docs.astro.build/en/guides/fonts/)
 
-## 📖 Documentation
+## Google Site Verification (optional)
 
-Using Astro Paper v5.5.0
+I have not done it yet, but I can add [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) by setting `site.googleVerification` in `astro-paper.config.ts`:
+
+```ts file="astro-paper.config.ts"
+export default defineAstroPaperConfig({
+  site: {
+    // ...
+    googleVerification: "your-google-site-verification-value",
+  },
+  // ...
+});
+```
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command          | Action                                                                                                                           |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm install`   | Installs dependencies                                                                                                            |
+| `pnpm dev`       | Starts local dev server at `localhost:4321`                                                                                      |
+| `pnpm build`     | Type-checks, builds the site, runs Pagefind indexing, and copies the index to `public/pagefind/`                                 |
+| `pnpm preview`   | Preview your build locally, before deploying                                                                                     |
+| `pnpm sync`      | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
+| `pnpm astro ...` | Run CLI commands like `astro add`, `astro check`|
+
+## Usage Info
 
 ### Adding Posts
 
-To write a new blog post, create a markdown file inside the `src/data/blog/` directory. You can organize blog posts into subdirectories, making it easier to manage content.
+To write a new blog post, create a markdown file inside the `src/content/posts/` directory. You can organize blog posts into subdirectories, making it easier to manage content.
 
-For example, if you want to group posts under `2025`, you can place them in `src/data/blog/2025/`. This also affects the post URL, so `src/data/blog/2025/example-post.md` will be available at `/posts/2025/example-post`.
+For example, if you want to group posts under `2025`, you can place them in `src/content/posts/2025/`. This also affects the post URL, so `src/content/posts/2025/example-post.md` will be available at `/posts/2025/example-post`.
 
 If you don’t want subdirectories to affect the post URL, just prefix the folder name with an underscore `_`.
 
@@ -58,7 +111,7 @@ src/data/blog/docs/_legacy/how-to.md      -> mysite.com/posts/docs/how-to
 src/data/blog/Example Dir/Dummy Post.md   -> mysite.com/posts/example-dir/dummy-post
 ```
 
-> 💡 Tip: You can override a blog post’s slug in the frontmatter as well. See the next section for more details.
+> Tip: You can override a blog post’s slug in the frontmatter as well. See the next section for more details.
 
 If the subdirectory URL doesn’t appear in the build output, remove node_modules, reinstall packages, and then rebuild.
 
@@ -84,7 +137,7 @@ Here is the list of frontmatter properties for each post.
 | **_hideEditPost_** | Hide editPost button under blog title. This applies only to the current blog post.                                                    | default = false                                |
 | **_timezone_**     | Specify a timezone in IANA format for the current blog post. This will override the `SITE.timezone` config for the current blog post. | default = `SITE.timezone`                      |
 
-> Tip! You can get ISO 8601 datetime by running `new Date().toISOString()` in the console. Make sure you remove quotes though.
+Tip: You can get ISO 8601 datetime by running `new Date().toISOString()` in the console. Make sure you remove quotes though.
 
 Only `title`, `description` and `pubDatetime` fields in frontmatter must be specified.
 
@@ -108,7 +161,7 @@ export const blogSchema = z.object({
 
 Here is the sample frontmatter for a post.
 
-```yaml file="src/data/blog/sample-post.md"
+```yaml file="src/content/posts/sample-post.md"
 ---
 title: The title of the post
 author: your name
@@ -218,7 +271,7 @@ If including an OG image, specify it in the frontmatter. The recommended size fo
 
 ### Styling
 
-Modify global.css file.
+Modify themes.css file.
 
 | Color Property     | Definition and Usage                                                           |
 | ------------------ | ------------------------------------------------------------------------------ |
@@ -227,58 +280,3 @@ Modify global.css file.
 | --accent	<br>	<br> | Accent color of the website. Link color, hover color, post title cover, etc... |
 | --muted            | Card and scrollbar background color for hover state, highlighted text, etc...  |
 | --border           | Border color. Especially used in horizontal rows (hr)                           |
-
-
-## 💻 Tech Stack
-
-**Main Framework** - [Astro](https://astro.build/)  
-**Type Checking** - [TypeScript](https://www.typescriptlang.org/)  
-**Styling** - [TailwindCSS](https://tailwindcss.com/)  
-**Static Search** - [FuseJS](https://pagefind.app/)  
-**Icons** - [Tablers](https://tabler-icons.io/)  
-**Code Formatting** - [Prettier](https://prettier.io/)  
-**Deployment** - [Github Pages](https://docs.github.com/en/pages)  
-**Illustration in About Page** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
-**Linting** - [ESLint](https://eslint.org)
-
-## 👨🏻‍💻 Running Locally
-
-You can start using this project locally by running the following command in your desired directory:
-
-```bash
-# pnpm
-git clone https://github.com/avanishd-3/avanishd-3.github.io.git
-```
-
-Then start the project by running the following commands:
-
-```bash
-# install dependencies
-pnpm install
-
-# start running the project
-pnpm run dev
-```
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                              | Action                                                                                                                           |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm install`                       | Installs dependencies                                                                                                            |
-| `pnpm run dev`                       | Starts local dev server at `localhost:4321`                                                                                      |
-| `pnpm run build`                     | Build your production site to `./dist/`                                                                                          |
-| `pnpm run preview`                   | Preview your build locally, before deploying                                                                                     |
-| `pnpm run format:check`              | Check code format with Prettier                                                                                                  |
-| `pnpm run format`                    | Format codes with Prettier                                                                                                       |
-| `pnpm run sync`                      | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
-| `pnpm run lint`                      | Lint with ESLint  |             
-
-> **_Warning!_** Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
-
-## 📜 License
-
-Licensed under the MIT License, Copyright © 2025
-
----
