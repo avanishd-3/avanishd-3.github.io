@@ -134,8 +134,7 @@ Here is the list of frontmatter properties for each post.
 | **_draft_**        | Mark this post 'unpublished'.                                                                                                         | default = false                                |
 | **_tags_**         | Related keywords for this post. Written in array yaml format.                                                                         | default = others                               |
 | **_ogImage_**      | OG image of the post. Useful for social media sharing and SEO. This can be a remote URL or an image path relative to current folder.  | default = `SITE.ogImage` or generated OG image |
-| **_canonicalURL_** | Canonical URL (absolute), in case the article already exists on other source.                                                         | default = `Astro.site` + `Astro.url.pathname`  |
-| **_hideEditPost_** | Hide editPost button under blog title. This applies only to the current blog post.                                                    | default = false                                |
+| **_canonicalURL_** | Canonical URL (absolute), in case the article already exists on other source.                                                         | default = `Astro.site` + `Astro.url.pathname`  |               |
 | **_timezone_**     | Specify a timezone in IANA format for the current blog post. This will override the `SITE.timezone` config for the current blog post. | default = `SITE.timezone`                      |
 
 Tip: You can get ISO 8601 datetime by running `new Date().toISOString()` in the console. Make sure you remove quotes though.
